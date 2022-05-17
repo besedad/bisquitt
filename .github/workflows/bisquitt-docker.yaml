@@ -1,0 +1,19 @@
+name: bisquitt docker
+
+on:
+  push:
+    tags: [ "*" ]
+
+jobs:
+  build-and-push-image:
+    name: Build and push a Docker image
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: "go/src/github.com/energomonitor/bisquitt"
+
+      - name: Build image
+        run: "make docker/build"
+        working-directory: "go/src/github.com/energomonitor/bisquitt"
+
